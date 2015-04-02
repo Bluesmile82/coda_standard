@@ -9,6 +9,7 @@ module CodaStandard
       File.open( file_name ).each do |line|
         if line =~ /^21/
           create_transaction
+          set_amount(line)
         end
         if line =~ /^23/
           set_name(line)
@@ -34,6 +35,18 @@ module CodaStandard
       regex_address = /^32\d{8}(.+)[10]\s[10]$/
       address = line.scan(regex_address).join.strip
       @transactions.last.address = address if address != ""
+    end
+    def set_amount(line)
+
+      regex_amount = /^21\d+\s+\d(\d{15})/
+      regex_clean_zeros = /0+([^0]\d+)(\d{3})/
+      # previous number involving credit or debit skipped
+      amount = line.scan(regex_amount).join
+      amount_integral = amount.scan(regex_clean_zeros)[0][0]
+      amount_decimals = amount.scan(regex_clean_zeros)[0][1]
+      separator = ","
+      amount = amount_integral + separator + amount_decimals
+      @transactions.last.amount = amount if amount != ""
     end
   end
 end
