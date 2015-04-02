@@ -19,9 +19,9 @@ Or install it yourself as:
 
 ## Usage
 
-CodaStandard::Parser.new.parse(filename) => Returns an array of Transaction instances
+  $ CodaStandard::Parser.new.parse(filename)
 
-Returns an array
+Returns an array of Transaction instances
 
 ## Contributing
 
