@@ -23,6 +23,10 @@ Or install it yourself as:
 
 Returns an array of Transaction instances
 
+  $ CodaStandard::Parser.show.parse(filename)
+
+Shows the transactions info in the terminal
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/coda-standard/fork )
@@ -33,7 +37,3 @@ Returns an array of Transaction instances
 =======
 
 TODO:
-
-- Parse Currencies
-- Other method to show all the info
-- add ID
