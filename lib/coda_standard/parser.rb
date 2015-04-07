@@ -18,6 +18,7 @@ module CodaStandard
           @transactions.last.amount = line.set_amount
         end
         if line.line =~ /^23/
+          @transactions.last.currency = line.set_currency
           @transactions.last.name = line.set_name
           @transactions.last.account = line.set_account
         end
@@ -35,6 +36,19 @@ module CodaStandard
 
     def create_transaction
       @transactions << Transaction.new
+    end
+
+    def show(file_name)
+      transactions = parse(file_name)
+      puts "**--Transactions--**\n\n"
+      puts "Old balance: #{transactions.first.old_balance}\n\n"
+      transactions.each_with_index do |transaction, index|
+       puts "-- Transaction n.#{index + 1} in date #{transaction.entry_date}-- \n\n"
+       puts "   RN: #{transaction.reference_number} Account: #{transaction.account}"
+       puts "   Amount: #{transaction.amount} #{transaction.currency}"
+       puts "   Name: #{transaction.name}"
+       puts "   Address: #{transaction.address} #{transaction.postcode} #{transaction.city} #{transaction.country} \n\n"
+      end
     end
   end
 end

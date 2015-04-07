@@ -1,14 +1,5 @@
 module CodaStandard
   class Transaction
-    attr_accessor :name
-    attr_accessor :address
-    attr_accessor :postcode
-    attr_accessor :city
-    attr_accessor :country
-    attr_accessor :amount
-    attr_accessor :old_balance
-    attr_accessor :account
-    attr_accessor :entry_date
-    attr_accessor :reference_number
+    attr_accessor :name, :currency, :address, :postcode, :city, :country, :amount, :old_balance, :account, :entry_date, :reference_number
   end
 end

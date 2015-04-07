@@ -32,3 +32,8 @@ Returns an array of Transaction instances
 5. Create a new Pull Request
 =======
 
+TODO:
+
+- Parse Currencies
+- Other method to show all the info
+- add ID
