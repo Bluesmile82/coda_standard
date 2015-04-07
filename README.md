@@ -19,11 +19,11 @@ Or install it yourself as:
 
 ## Usage
 
-  $ CodaStandard::Parser.new.parse(filename)
+    $ CodaStandard::Parser.new.parse(filename)
 
 Returns an array of Transaction instances
 
-  $ CodaStandard::Parser.show.parse(filename)
+    $ CodaStandard::Parser.show.parse(filename)
 
 Shows the transactions info in the terminal
 
@@ -34,6 +34,5 @@ Shows the transactions info in the terminal
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
-=======
 
-TODO:
+=======
