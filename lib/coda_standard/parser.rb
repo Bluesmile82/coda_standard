@@ -9,21 +9,21 @@ module CodaStandard
       File.open( file_name ).each do |row|
         line = Line.new(row)
         if line.line =~ /^1/
-          @old_balance = line.set_old_balance
+          @old_balance = line.set(:old_balance)
         end
         if line.line =~ /^21/
           create_transaction
-          @transactions.last.entry_date = line.set_entry_date
-          @transactions.last.reference_number = line.set_reference_number
-          @transactions.last.amount = line.set_amount
+          @transactions.last.entry_date = line.set(:entry_date)
+          @transactions.last.reference_number = line.set(:reference_number)
+          @transactions.last.amount = line.set(:amount)
         end
         if line.line =~ /^23/
-          @transactions.last.currency = line.set_currency
-          @transactions.last.name = line.set_name
-          @transactions.last.account = line.set_account
+          @transactions.last.currency = line.set(:currency)
+          @transactions.last.name = line.set(:name)
+          @transactions.last.account = line.set(:account)
         end
         if line.line =~ /^32/
-          address = line.set_address
+          address = line.set(:address)
           @transactions.last.address = address[:address]
           @transactions.last.postcode = address[:postcode]
           @transactions.last.city = address[:city]
