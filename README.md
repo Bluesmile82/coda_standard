@@ -23,7 +23,7 @@ Or install it yourself as:
 
 Returns an array of Transaction instances
 
-    $ CodaStandard::Parser.new.show.parse(filename)
+    $ CodaStandard::Parser.new.show(filename)
 
 Shows the transactions info in the terminal
 
