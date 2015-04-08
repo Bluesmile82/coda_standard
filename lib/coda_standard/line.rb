@@ -24,6 +24,7 @@ module CodaStandard
     def current_bic
       extract(:current_bic)
     end
+
     def current_account
       extract(:current_account)
     end
@@ -31,6 +32,33 @@ module CodaStandard
       extract(:old_balance)
     end
 
+    def entry_date
+      extract(:entry_date)
+    end
+    def reference_number
+      extract(:reference_number)
+    end
+    def amount
+      extract(:amount)
+    end
+    def bic
+      extract(:bic)
+    end
+
+    def currency
+      extract(:currency)
+    end
+    def name
+      extract(:name)
+    end
+    def account
+      extract(:account)
+    end
+    def address
+      extract(:address)
+    end
+
+    private
 
     def extract(field)
       result = @line.scan(@regexp[field]).join.strip
@@ -51,7 +79,7 @@ module CodaStandard
     end
 
     def clean_account(account)
-      account.scan(@regexp[:currencies])[0][0]
+      account.scan(@regexp[:currencies])[0][0].strip
     end
 
     def clean_zeros(amount)

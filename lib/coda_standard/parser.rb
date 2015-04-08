@@ -1,12 +1,12 @@
 module CodaStandard
   class Parser
-    attr_reader :transactions, :old_balance, :current_bic, :current_account
+    attr_reader :transactions, :old_balance, :current_bic, :current_account, :current_transaction
     def initialize
       @transactions = []
       @old_balance
       @current_bic
       @current_account
-      @current_transaction
+      @current_transaction = Transaction.new
     end
 
     def parse(file_name)
@@ -20,17 +20,17 @@ module CodaStandard
           @old_balance = line.old_balance
         when line.line =~ /^21/
           @current_transaction = create_transaction
-          @current_transaction.entry_date = line.extract(:entry_date)
-          @current_transaction.reference_number = line.extract(:reference_number)
-          @current_transaction.amount = line.extract(:amount)
+          @current_transaction.entry_date = line.entry_date
+          @current_transaction.reference_number = line.reference_number
+          @current_transaction.amount = line.amount
         when line.line =~ /^22/
-          @current_transaction.bic = line.extract(:bic)
+          @current_transaction.bic = line.bic
         when line.line =~ /^23/
-          @current_transaction.currency = line.extract(:currency)
-          @current_transaction.name = line.extract(:name)
-          @current_transaction.account = line.extract(:account)
+          @current_transaction.currency = line.currency
+          @current_transaction.name = line.name
+          @current_transaction.account = line.account
         when line.line =~ /^32/
-          address = line.extract(:address)
+          address = line.address
           set_address(address)
         end
       end
