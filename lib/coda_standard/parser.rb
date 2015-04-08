@@ -1,5 +1,6 @@
 module CodaStandard
   class Parser
+    attr_reader :transactions, :old_balance, :current_bic, :current_account
     def initialize
       @transactions = []
       @old_balance
@@ -8,9 +9,9 @@ module CodaStandard
     end
 
     def parse(file_name)
-      File.open( file_name ).each do |row|
-        line = Line.new(row)
-        case
+      file = File.open( file_name ).each do |row|
+      line = Line.new(row)
+      case
         when line.line =~ /^0/
           @current_bic = line.set(:current_bic)
         when line.line =~ /^1/
