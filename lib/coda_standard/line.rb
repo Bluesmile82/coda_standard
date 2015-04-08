@@ -1,6 +1,7 @@
 module CodaStandard
   class Line
     attr_reader :line
+
     def initialize(line)
       @line = line
       @regexp = {
@@ -28,6 +29,7 @@ module CodaStandard
     def current_account
       extract(:current_account)
     end
+
     def old_balance
       extract(:old_balance)
     end
@@ -35,12 +37,15 @@ module CodaStandard
     def entry_date
       extract(:entry_date)
     end
+
     def reference_number
       extract(:reference_number)
     end
+
     def amount
       extract(:amount)
     end
+
     def bic
       extract(:bic)
     end
@@ -48,12 +53,15 @@ module CodaStandard
     def currency
       extract(:currency)
     end
+
     def name
       extract(:name)
     end
+
     def account
       extract(:account)
     end
+
     def address
       extract(:address)
     end
