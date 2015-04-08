@@ -21,7 +21,18 @@ module CodaStandard
       }
     end
 
-    def set(field)
+    def current_bic
+      extract(:current_bic)
+    end
+    def current_account
+      extract(:current_account)
+    end
+    def old_balance
+      extract(:old_balance)
+    end
+
+
+    def extract(field)
       result = @line.scan(@regexp[field]).join.strip
       case field
         when :address

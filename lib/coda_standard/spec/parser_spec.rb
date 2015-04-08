@@ -22,15 +22,15 @@ describe CodaStandard::Parser do
     it "opens the file" do
     end
     it "creates a new line" do
-      @parser.parse(@file_name)
-
+      expect{@parser.parse(@file_name)}.to change {CodaStandard::Line}
     end
     it "returns an array if transactions" do
     end
   end
 
   describe "create_transaction" do
-    it "creates a new transaction" do
+    it "creates new transactions" do
+      expect{@parser.parse(@file_name)}.to change {@parser.transactions}
     end
   end
 
