@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe CodaStandard::Parser do
 
   before :each do
-    @file_name = '../../coda.cod'
+    @file_name = 'spec/coda.cod'
     @file = File.open( @file_name )
     @parser = CodaStandard::Parser.new
   end
@@ -11,10 +11,7 @@ describe CodaStandard::Parser do
   describe "initialize" do
 
     it "initializes some class variables" do
-      expect(@parser.transactions).to eq []
-      expect(@parser.old_balance).to eq nil
-      expect(@parser.current_bic).to eq nil
-      expect(@parser.current_account).to eq nil
+      expect(@parser.transactions).to be_a(CodaStandard::TransactionList)
     end
   end
 
@@ -23,31 +20,10 @@ describe CodaStandard::Parser do
       @parser.parse(@file_name)
     end
 
-    it "returns an array" do
-      expect(@parser.transactions).to be_a(Array)
+    it "returns a Transactions object" do
+        expect(@parser.parse(@file_name)).to be_a(CodaStandard::TransactionList)
     end
 
-    it "returns an array of transactions" do
-      @parser.transactions.each do |transaction|
-        expect(transaction).to be_a(CodaStandard::Transaction)
-      end
-    end
-    it "has an old_balance" do
-      expect(@parser.old_balance).not_to eq(nil)
-    end
-    it "has an current_bic" do
-      expect(@parser.current_bic).not_to eq(nil)
-    end
-     it "has an current_account" do
-      expect(@parser.current_account).not_to eq(nil)
-    end
-  end
-
-  describe "create_transaction" do
-    it "creates new transactions" do
-      transaction = @parser.create_transaction
-      expect(@parser.transactions.last).to be(transaction)
-    end
   end
 
   describe "set_address" do

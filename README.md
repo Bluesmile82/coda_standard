@@ -21,7 +21,15 @@ Or install it yourself as:
 
     $ CodaStandard::Parser.new.parse(filename)
 
-Returns an array of Transaction instances
+Returns an TransactionList object
+
+    $ CodaStandard::Parser.new.parse(filename).transactions
+
+Returns an array of transactions
+
+    $ CodaStandard::Parser.new.parse(filename).current_bic => "GEBABEBB"
+
+You can get different common data from the TransactionList (current_bic, old_balance, current_account)
 
     $ CodaStandard::Parser.new.show(filename)
 
