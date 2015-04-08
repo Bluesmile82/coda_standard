@@ -6,7 +6,7 @@ This gem parses the Coded statement of account (CODA) bank standard.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'coda-standard'
+gem 'coda_standard'
 ```
 
 And then execute:
