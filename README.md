@@ -1,4 +1,4 @@
-# Coda_Standard Gem
+# coda_standard Gem
 
 This gem parses the Coded statement of account (CODA) bank standard.
 ## Installation
