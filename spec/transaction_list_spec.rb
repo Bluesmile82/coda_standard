@@ -6,16 +6,8 @@ describe CodaStandard::TransactionList do
   end
 
   describe "initialize some values" do
-    it "has an old_balance" do
-      expect(@transaction_list.old_balance).to eq(nil)
-    end
-
-    it "has an current_bic" do
-      expect(@transaction_list.current_bic).to eq(nil)
-    end
-
-    it "has an current_account" do
-      expect(@transaction_list.current_account).to eq(nil)
+    it "has an transactions array" do
+      expect(@transaction_list.transactions).to eq([])
     end
   end
 

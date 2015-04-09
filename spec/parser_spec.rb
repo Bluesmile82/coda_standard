@@ -57,7 +57,7 @@ describe CodaStandard::Parser do
     end
 
     it "sets the account_type field to the TransactionList" do
-      expect(@parser.transactions.account_type).to eq("bban_be_account")
+      expect(@parser.transactions.current_account_type).to eq("bban_be_account")
     end
   end
 

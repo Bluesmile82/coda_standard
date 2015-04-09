@@ -1,4 +1,4 @@
-# Coda-Standard Gem
+# Coda_Standard Gem
 
 This gem parses the Coded statement of account (CODA) bank standard.
 ## Installation
@@ -15,7 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install coda-standard
+    $ gem install coda_standard
 
 ## Usage
 
@@ -29,7 +29,7 @@ Returns an array of transactions
 
     $ CodaStandard::Parser.new.parse(filename).current_bic => "GEBABEBB"
 
-You can get different common data from the TransactionList (current_bic, old_balance, current_account)
+You can get different common data from the TransactionList (current_bic, old_balance, current_account, current_account_type)
 
     $ CodaStandard::Parser.new.show(filename)
 
