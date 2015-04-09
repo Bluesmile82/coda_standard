@@ -18,7 +18,7 @@ describe CodaStandard::Line do
 
   describe "current_account" do
     it "extracts the current_account" do
-      expect(@line1.current_account).to eq("035918134040")
+      expect(@line1.current_account).to eq({account_number:"035918134040", account_type:"bban_be_account"})
     end
   end
 

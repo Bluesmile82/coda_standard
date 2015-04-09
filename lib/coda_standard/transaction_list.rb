@@ -1,6 +1,6 @@
 module CodaStandard
   class TransactionList
-    attr_accessor :current_bic, :old_balance, :current_account
+    attr_accessor :current_bic, :old_balance, :current_account, :account_type
     attr_reader :transactions
 
     def initialize

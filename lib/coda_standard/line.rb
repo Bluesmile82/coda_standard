@@ -6,7 +6,7 @@ module CodaStandard
       @line = line
       @regexp = {
         current_bic: /^0.{59}(.{11})/,
-        current_account: /^1.{4}(.{37})/,
+        current_account: /^1(.{41})/,
         name: /^23.{45}(.{35})/,
         currency: /^23.{42}(.{3})/,
         entry_date: /^21.{113}(\d{6})/,
@@ -18,6 +18,11 @@ module CodaStandard
         old_balance: /^1.{41}(\d)(\d{15})/,
         clean_zeros: /0*([^0]\d+)(\d{3})/,
         sep_address: /(^.+)(\d{4})\s(\S+)(\s\S+)?$/,
+        sep_account: /(^.)(.{3})(.+)/,
+        bban_be_account: /(^.{12})/,
+        bban_foreign_account: /(^.{34})/,
+        iban_be_account: /(^.{31})/,
+        iban_foreign_account: /(^.{34})/,
         currencies:/(^.+)(AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BOV|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHE|CHF|CHW|CLF|CLP|CNY|COP|COU|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|INR|IQD|IRR|ISK|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LTL|LVL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MXV|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SRD|SSP|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TWD|TZS|UAH|UGX|USD|USN|USS|UYI|UYU|UZS|VEF|VND|VUV|WST|XAF|XAG|XAU|XBA|XBB|XBC|XBD|XCD|XDR|XFU|XOF|XPD|XPF|XPT|XSU|XTS|XUA|XXX|YER|ZAR|ZMW|ZWL)/
       }
     end
@@ -87,7 +92,17 @@ module CodaStandard
     end
 
     def clean_account(account)
-      account.scan(@regexp[:currencies])[0][0].strip
+      account_type = account.scan(@regexp[:sep_account])[0][0]
+      sequence_number = account.scan(@regexp[:sep_account])[0][1]
+      raw_account = account.scan(@regexp[:sep_account])[0][2]
+      case account_type
+        when "0" then account_type = "bban_be_account"
+        when "1" then account_type = "bban_foreign_account"
+        when "2" then account_type = "iban_be_account"
+        when "3" then account_type = "iban_foreign_account"
+      end
+      account_number = raw_account.scan(@regexp[account_type.to_sym]).join
+      {account_type: account_type, account_number: account_number}
     end
 
     def clean_zeros(amount)

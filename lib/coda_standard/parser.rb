@@ -13,7 +13,7 @@ module CodaStandard
         when line.line =~ /^0/
           @transactions.current_bic = line.current_bic
         when line.line =~ /^1/
-          @transactions.current_account = line.current_account
+          set_account(line.current_account)
           @transactions.old_balance = line.old_balance
         when line.line =~ /^21/
           @current_transaction = @transactions.create
@@ -27,8 +27,7 @@ module CodaStandard
           @current_transaction.name = line.name
           @current_transaction.account = line.account
         when line.line =~ /^32/
-          address = line.address
-          set_address(address)
+          set_address(line.address)
         end
       end
       @transactions
@@ -41,10 +40,15 @@ module CodaStandard
       @current_transaction.country = address[:country]
     end
 
+    def set_account(account)
+      @transactions.current_account = account[:account_number]
+      @transactions.account_type = account[:account_type]
+    end
+
     def show(file_name)
       transactions = parse(file_name)
       puts "**--Transactions--**\n\n"
-      puts "Account: #{@transactions.current_account} BIC: #{@transactions.current_bic}"
+      puts "Account: #{@transactions.current_account} Account type: #{@transactions.account_type} BIC: #{@transactions.current_bic}"
       puts "Old balance: #{@transactions.old_balance} \n\n"
       transactions.each_with_index do |transaction, index|
         puts "-- Transaction n.#{index + 1} in date #{transaction.entry_date}-- \n\n"
