@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["pursuance@gmail.com"]
   spec.summary       = %q{CODA bank standard file parser}
   spec.description   = "This gem parses the Coded statement of account (CODA) bank standard"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/Bluesmile82/coda_standard"
   spec.license       = "MIT"
 
   spec.files         = `git ls-filecd ..s -z`.split("\x0")
