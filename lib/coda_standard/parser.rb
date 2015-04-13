@@ -1,6 +1,7 @@
 module CodaStandard
   class Parser
     attr_reader :transactions, :old_balance, :current_bic, :current_account, :current_transaction
+
     def initialize
       @transactions = TransactionList.new
       @current_transaction = Transaction.new
