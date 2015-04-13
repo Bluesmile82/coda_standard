@@ -2,12 +2,13 @@ require_relative 'spec_helper'
 
 describe CodaStandard::Line do
   before :each do
-    @line0 = CodaStandard::Line.new("0000031031520005                  MMIF SA/EVOCURE           GEBABEBB   00538839354 00000                                       2")
-    @line1 = CodaStandard::Line.new("10016035918134040 EUR0BE                  0000000057900000300315MMIF SA/EVOCURE                                              017")
+    @line0 = CodaStandard::Line.new("0000031031520005                  MMIF SA/BANK              GEBABEBB   00538839354 00000                                       2")
+    @line1 = CodaStandard::Line.new("10016539007547034 EUR0BE                  0000000057900000300315MMIF SA/EVOCURE                                              017")
     @line21 = CodaStandard::Line.new("21000100000001500000103        0000000000500000010415001500001101100000834941                                      31031501601 0")
+    @line21b = CodaStandard::Line.new("21000100000001500000103        0000000000500000010415001500001001100000834941                                      31031501601 0")
     @line22 = CodaStandard::Line.new("2200010000                                                                                        GKCCBEBB                   1 0")
-    @line23 = CodaStandard::Line.new("2300010000BE96553242750005                  EURCOUREL PASCAL                                                                 0 1")
-    @line32 = CodaStandard::Line.new("3200010001CHAUSSEE DE MALINES 10             1970 WEZEMBEEK-OPPEM                                                            0 0")
+    @line23 = CodaStandard::Line.new("2300010000BE53900754703405                  EURLASTNM PERSON                                                                 0 1")
+    @line32 = CodaStandard::Line.new("32000200015 STREET                                     3654 CITY BELGIQUE                                                    0 0")
     end
 
   describe "current_bic" do
@@ -18,7 +19,7 @@ describe CodaStandard::Line do
 
   describe "current_account" do
     it "extracts the current_account" do
-      expect(@line1.current_account).to eq({account_number:"035918134040", account_type:"bban_be_account"})
+      expect(@line1.current_account).to eq({account_number:"539007547034", account_type:"bban_be_account"})
     end
   end
 
@@ -60,19 +61,32 @@ describe CodaStandard::Line do
 
   describe "name" do
     it "extracts the name" do
-      expect(@line23.name).to eq("COUREL PASCAL")
+      expect(@line23.name).to eq("LASTNM PERSON")
     end
   end
 
   describe "account" do
     it "extracts the account" do
-      expect(@line23.account).to eq("BE96553242750005")
+      expect(@line23.account).to eq("BE53900754703405")
+    end
+  end
+
+  describe "transaction_number" do
+    context "structured_number" do
+      it "extracts the number" do
+        expect(@line21.transaction_number).to eq("100000834941")
+      end
+    end
+    context "non-structured_number" do
+      it "returns not structured" do
+        expect(@line21b.transaction_number).to eq("not structured")
+      end
     end
   end
 
   describe "address" do
     it "extracts the address" do
-      expect(@line32.address).to eq({:address=>"CHAUSSEE DE MALINES 10", :postcode=>"1970", :city=>"WEZEMBEEK-OPPEM", :country=>nil})
+      expect(@line32.address).to eq({:address=>"5 STREET", :postcode=>"3654", :city=>"CITY", :country=>" BELGIQUE"})
     end
   end
 

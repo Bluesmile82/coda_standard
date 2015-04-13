@@ -63,7 +63,7 @@ describe CodaStandard::Parser do
 
   describe "show" do
     it "shows the info from the transactions" do
-      expect{@parser.show(@file_name)}.to output("**--Transactions--**\n\nAccount: 539007547034 Account type: bban_be_account BIC: GEBABEBB\nOld balance: 57900,000 \n\n-- Transaction n.1 in date 310315-- \n\n   RN: 0001500000103 Account: BE53900754703405 BIC:GKCCBEBB\n   Amount: 500,000 EUR\n   Name: LASTNM PERSON\n   Address: CHAUSSEE DE BIERE 10 1978 SOMECITY  \n\n-- Transaction n.2 in date 310315-- \n\n   RN: 0001500000104 Account: LU539007547034898400 BIC:BILLLULL\n   Amount: 200,000 EUR\n   Name: M.JOHN DOE\n   Address: 5 STREET 3654 CITY  BELGIQUE \n\n").to_stdout
+      expect{@parser.show(@file_name)}.to output("**--Transactions--**\n\nAccount: 539007547034 Account type: bban_be_account BIC: GEBABEBB\nOld balance: 57900,000 \n\n-- Transaction n.1 - number 100000834941 - in date 310315-- \n\n   RN: 0001500000103 Account: BE53900754703405 BIC:GKCCBEBB\n   Amount: 500,000 EUR\n   Name: LASTNM PERSON\n   Address: CHAUSSEE DE BIERE 10 1978 SOMECITY  \n\n-- Transaction n.2 - number 100000835749 - in date 310315-- \n\n   RN: 0001500000104 Account: LU539007547034898400 BIC:BILLLULL\n   Amount: 200,000 EUR\n   Name: M.JOHN DOE\n   Address: 5 STREET 3654 CITY  BELGIQUE \n\n").to_stdout
     end
   end
 end
