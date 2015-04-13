@@ -3,8 +3,8 @@ module CodaStandard
     attr_reader :transactions, :old_balance, :current_bic, :current_account, :current_transaction
 
     def initialize(filename)
-      @filename = filename
-      @transactions = TransactionList.new
+      @filename            = filename
+      @transactions        = TransactionList.new
       @current_transaction = Transaction.new
     end
 
@@ -19,16 +19,16 @@ module CodaStandard
             @transactions.old_balance = line.old_balance
           when line.line =~ /^21/
             @current_transaction = @transactions.create
-            @current_transaction.entry_date = line.entry_date
-            @current_transaction.reference_number = line.reference_number
-            @current_transaction.amount = line.amount
+            @current_transaction.entry_date         = line.entry_date
+            @current_transaction.reference_number   = line.reference_number
+            @current_transaction.amount             = line.amount
             @current_transaction.transaction_number = line.transaction_number
           when line.line =~ /^22/
             @current_transaction.bic = line.bic
           when line.line =~ /^23/
             @current_transaction.currency = line.currency
-            @current_transaction.name = line.name
-            @current_transaction.account = line.account
+            @current_transaction.name     = line.name
+            @current_transaction.account  = line.account
           when line.line =~ /^32/
             set_address(line.address)
         end
@@ -37,14 +37,14 @@ module CodaStandard
     end
 
     def set_address(address)
-      @current_transaction.address = address[:address]
+      @current_transaction.address  = address[:address]
       @current_transaction.postcode = address[:postcode]
-      @current_transaction.city = address[:city]
-      @current_transaction.country = address[:country]
+      @current_transaction.city     = address[:city]
+      @current_transaction.country  = address[:country]
     end
 
     def set_account(account)
-      @transactions.current_account = account[:account_number]
+      @transactions.current_account      = account[:account_number]
       @transactions.current_account_type = account[:account_type]
     end
 
