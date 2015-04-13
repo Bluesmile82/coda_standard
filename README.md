@@ -5,7 +5,7 @@ This gem parses the Coded statement of account (CODA) bank standard.
 
 Add this line to your application's Gemfile:
 
-```ruby
+```
 gem 'coda_standard'
 ```
 
@@ -19,24 +19,31 @@ Or install it yourself as:
 
 ## Usage
 
-    $ CodaStandard::Parser.new.parse(filename)
+```ruby
+CodaStandard::Parser.new.parse(filename)
+```
 
 Returns an TransactionList object
 
-    $ CodaStandard::Parser.new.parse(filename).transactions
+```ruby
+CodaStandard::Parser.new.parse(filename).transactions
+```
 
 Returns an array of transactions
 
-    $ CodaStandard::Parser.new.parse(filename).current_bic => "GEBABEBB"
+```ruby
+CodaStandard::Parser.new.parse(filename).current_bic => "GEBABEBB"
+```
 
 You can get different common data from the TransactionList (current_bic, old_balance, current_account, current_account_type)
 
-    $ CodaStandard::Parser.new.show(filename)
+```ruby
+CodaStandard::Parser.new.show(filename)
+```
 
-Shows the transactions info in the terminal
+Shows the transactions info in the terminal.
 
-The info you can get from each transaction is:
-  name, currency, bic, address, postcode, city, country, amount, account, entry_date, reference_number and transaction_number
+The info you can get from each transaction is: name, currency, bic, address, postcode, city, country, amount, account, entry_date, reference_number and transaction_number.
 
 ## Contributing
 
@@ -45,5 +52,3 @@ The info you can get from each transaction is:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
-
-=======
