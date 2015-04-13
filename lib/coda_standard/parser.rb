@@ -8,28 +8,28 @@ module CodaStandard
     end
 
     def parse(file_name)
-      file = File.open( file_name ).each do |row|
-      line = Line.new(row)
-      case
-        when line.line =~ /^0/
-          @transactions.current_bic = line.current_bic
-        when line.line =~ /^1/
-          set_account(line.current_account)
-          @transactions.old_balance = line.old_balance
-        when line.line =~ /^21/
-          @current_transaction = @transactions.create
-          @current_transaction.entry_date = line.entry_date
-          @current_transaction.reference_number = line.reference_number
-          @current_transaction.amount = line.amount
-          @current_transaction.transaction_number = line.transaction_number
-        when line.line =~ /^22/
-          @current_transaction.bic = line.bic
-        when line.line =~ /^23/
-          @current_transaction.currency = line.currency
-          @current_transaction.name = line.name
-          @current_transaction.account = line.account
-        when line.line =~ /^32/
-          set_address(line.address)
+      File.open(file_name).each do |row|
+        line = Line.new(row)
+        case
+          when line.line =~ /^0/
+            @transactions.current_bic = line.current_bic
+          when line.line =~ /^1/
+            set_account(line.current_account)
+            @transactions.old_balance = line.old_balance
+          when line.line =~ /^21/
+            @current_transaction = @transactions.create
+            @current_transaction.entry_date = line.entry_date
+            @current_transaction.reference_number = line.reference_number
+            @current_transaction.amount = line.amount
+            @current_transaction.transaction_number = line.transaction_number
+          when line.line =~ /^22/
+            @current_transaction.bic = line.bic
+          when line.line =~ /^23/
+            @current_transaction.currency = line.currency
+            @current_transaction.name = line.name
+            @current_transaction.account = line.account
+          when line.line =~ /^32/
+            set_address(line.address)
         end
       end
       @transactions

@@ -101,7 +101,6 @@ module CodaStandard
 
     def clean_account(account)
       account_type = account.scan(@regexp[:sep_account])[0][0]
-      # sequence_number = account.scan(@regexp[:sep_account])[0][1]
       raw_account = account.scan(@regexp[:sep_account])[0][2]
       case account_type
         when "0" then account_type = "bban_be_account"
@@ -123,7 +122,6 @@ module CodaStandard
 
     def check_structured(number)
       if number[0] == "1"
-        structured = true
         number.scan(@regexp[:clean_structured]).join
       else
         "not structured"
