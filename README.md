@@ -35,6 +35,9 @@ You can get different common data from the TransactionList (current_bic, old_bal
 
 Shows the transactions info in the terminal
 
+The info you can get from each transaction is:
+  name, currency, bic, address, postcode, city, country, amount, account, entry_date, reference_number and transaction_number
+
 ## Contributing
 
 1. Fork it ( https://github.com/Bluesmile82/coda_standard/fork )
