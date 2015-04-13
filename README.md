@@ -1,49 +1,41 @@
-# coda_standard Gem
+# coda_standard
 
-This gem parses the Coded statement of account (CODA) bank standard.
-## Installation
+This gem parses the [Coded statement of account](https://www.febelfin.be/sites/default/files/files/Standard-CODA-22-EN.pdf) (CODA) bank standard used by some  banks and follows version 2.2 of this standard.
 
-Add this line to your application's Gemfile:
+> This bank standard specifies the lay-out for the electronic files, by banks to customers, of the account transactions and the information concerning the enclosures in connection with the movement. 
+
+The coda_standard gem requires Ruby version ~> 2.0. 
+
+## Install
+
+    $ gem install coda_standard
+
+or add the following line to Gemfile:
 
 ```
 gem 'coda_standard'
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install coda_standard
+and run `bundle install` from your shell.
 
 ## Usage
 
 ```ruby
+# a new TransactionList object:
 CodaStandard::Parser.new.parse(filename)
-```
 
-Returns an TransactionList object
-
-```ruby
+# or an array of transactions:
 CodaStandard::Parser.new.parse(filename).transactions
-```
 
-Returns an array of transactions
-
-```ruby
+# or maybe the BIC:
 CodaStandard::Parser.new.parse(filename).current_bic => "GEBABEBB"
-```
+# also available are: old_balance, current_account, current_account_type
 
-You can get different common data from the TransactionList (current_bic, old_balance, current_account, current_account_type)
-
-```ruby
+# or print a more readable represenation of the file
 CodaStandard::Parser.new.show(filename)
 ```
 
-Shows the transactions info in the terminal.
-
-The info you can get from each transaction is: name, currency, bic, address, postcode, city, country, amount, account, entry_date, reference_number and transaction_number.
+The available getters for each transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date`, `reference_number` and `transaction_number`.
 
 ## Contributing
 
@@ -52,3 +44,7 @@ The info you can get from each transaction is: name, currency, bic, address, pos
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## License
+
+coda_standard is Copyright © 2015 Alvaro Leal. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE) file.
