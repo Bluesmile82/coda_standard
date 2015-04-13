@@ -22,17 +22,17 @@ and run `bundle install` from your shell.
 
 ```ruby
 # a new TransactionList object:
-CodaStandard::Parser.new.parse(filename)
+CodaStandard::Parser.new(filename).parse
 
 # or an array of transactions:
-CodaStandard::Parser.new.parse(filename).transactions
+CodaStandard::Parser.new(filename).parse.transactions
 
 # or maybe the BIC:
-CodaStandard::Parser.new.parse(filename).current_bic => "GEBABEBB"
+CodaStandard::Parser.new(filename).parse.current_bic => "GEBABEBB"
 # also available are: old_balance, current_account, current_account_type
 
 # or print a more readable represenation of the file
-CodaStandard::Parser.new.show(filename)
+CodaStandard::Parser.new(filename).show
 ```
 
 The available getters for each transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date`, `reference_number` and `transaction_number`.

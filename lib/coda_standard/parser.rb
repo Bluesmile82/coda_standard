@@ -2,13 +2,14 @@ module CodaStandard
   class Parser
     attr_reader :transactions, :old_balance, :current_bic, :current_account, :current_transaction
 
-    def initialize
+    def initialize(filename)
+      @filename = filename
       @transactions = TransactionList.new
       @current_transaction = Transaction.new
     end
 
-    def parse(file_name)
-      File.open(file_name).each do |row|
+    def parse
+      File.open(@filename).each do |row|
         line = Line.new(row)
         case
           when line.line =~ /^0/
@@ -47,8 +48,8 @@ module CodaStandard
       @transactions.current_account_type = account[:account_type]
     end
 
-    def show(file_name)
-      parse(file_name)
+    def show
+      parse
       puts "**--Transactions--**\n\n"
       puts "Account: #{@transactions.current_account} Account type: #{@transactions.current_account_type} BIC: #{@transactions.current_bic}"
       puts "Old balance: #{@transactions.old_balance} \n\n"
