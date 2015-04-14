@@ -12,24 +12,24 @@ module CodaStandard
       File.open(@filename).each do |line|
         record = Record.new(line)
         case
-          when line =~ /^0/
+          when record.header?
             @transactions.current_bic = record.current_bic
-          when line =~ /^1/
+          when record.data_old_balance?
             set_account(record.current_account)
             @transactions.old_balance = record.old_balance
-          when line =~ /^21/
+          when record.data_movement1?
             @current_transaction = @transactions.create
             @current_transaction.entry_date         = record.entry_date
             @current_transaction.reference_number   = record.reference_number
             @current_transaction.amount             = record.amount
             @current_transaction.transaction_number = record.transaction_number
-          when line =~ /^22/
+          when record.data_movement2?
             @current_transaction.bic = record.bic
-          when line =~ /^23/
+          when record.data_movement3?
             @current_transaction.currency = record.currency
             @current_transaction.name     = record.name
             @current_transaction.account  = record.account
-          when line =~ /^32/
+          when record.data_information2?
             set_address(record.address)
         end
       end

@@ -29,6 +29,30 @@ module CodaStandard
       @line = line
     end
 
+    def header?
+      @line.start_with? "0"
+    end
+
+    def data_old_balance?
+      @line.start_with? "1"
+    end
+
+    def data_movement1?
+      @line.start_with? "21"
+    end
+
+    def data_movement2?
+      @line.start_with? "22"
+    end
+
+    def data_movement3?
+      @line.start_with? "23"
+    end
+
+    def data_information2?
+      @line.start_with? "32"
+    end
+
     def current_bic
       extract(:current_bic)
     end
