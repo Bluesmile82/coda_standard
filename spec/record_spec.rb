@@ -1,14 +1,14 @@
 require_relative 'spec_helper'
 
-describe CodaStandard::Line do
+describe CodaStandard::Record do
   before :each do
-    @line0 = CodaStandard::Line.new("0000031031520005                  MMIF SA/BANK              GEBABEBB   00538839354 00000                                       2")
-    @line1 = CodaStandard::Line.new("10016539007547034 EUR0BE                  0000000057900000300315MMIF SA/EVOCURE                                              017")
-    @line21 = CodaStandard::Line.new("21000100000001500000103        0000000000500000010415001500001101100000834941                                      31031501601 0")
-    @line21b = CodaStandard::Line.new("21000100000001500000103        0000000000500000010415001500001001100000834941                                      31031501601 0")
-    @line22 = CodaStandard::Line.new("2200010000                                                                                        GKCCBEBB                   1 0")
-    @line23 = CodaStandard::Line.new("2300010000BE53900754703405                  EURLASTNM PERSON                                                                 0 1")
-    @line32 = CodaStandard::Line.new("32000200015 STREET                                     3654 CITY BELGIQUE                                                    0 0")
+    @line0 = CodaStandard::Record.new("0000031031520005                  MMIF SA/BANK              GEBABEBB   00538839354 00000                                       2")
+    @line1 = CodaStandard::Record.new("10016539007547034 EUR0BE                  0000000057900000300315MMIF SA/EVOCURE                                              017")
+    @line21 = CodaStandard::Record.new("21000100000001500000103        0000000000500000010415001500001101100000834941                                      31031501601 0")
+    @line21b = CodaStandard::Record.new("21000100000001500000103        0000000000500000010415001500001001100000834941                                      31031501601 0")
+    @line22 = CodaStandard::Record.new("2200010000                                                                                        GKCCBEBB                   1 0")
+    @line23 = CodaStandard::Record.new("2300010000BE53900754703405                  EURLASTNM PERSON                                                                 0 1")
+    @line32 = CodaStandard::Record.new("32000200015 STREET                                     3654 CITY BELGIQUE                                                    0 0")
     end
 
   describe "current_bic" do

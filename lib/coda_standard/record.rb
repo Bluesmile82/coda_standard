@@ -1,7 +1,5 @@
 module CodaStandard
-  class Line
-    attr_reader :line
-
+  class Record
     FIELDS = {
       current_bic: /^0.{59}(.{11})/,
       current_account: /^1(.{41})/,
