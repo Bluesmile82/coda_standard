@@ -55,7 +55,7 @@ module CodaStandard
       puts "Old balance: #{@transactions.old_balance} \n\n"
       @transactions.each_with_index do |transaction, index|
         puts "-- Transaction n.#{index + 1} - number #{transaction.transaction_number} - in date #{transaction.entry_date}-- \n\n"
-        puts "   RN: #{transaction.reference_number} Account: #{transaction.account} BIC:#{transaction.bic}"
+        puts "   RN: #{transaction.reference_number} Account: #{transaction.account} BIC: #{transaction.bic}"
         puts "   Amount: #{transaction.amount} #{transaction.currency}"
         puts "   Name: #{transaction.name}"
         puts "   Address: #{transaction.address} #{transaction.postcode} #{transaction.city} #{transaction.country} \n\n"
