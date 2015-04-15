@@ -130,15 +130,15 @@ describe CodaStandard::Record do
     end
   end
 
-  describe "transaction_number" do
+  describe "structured_communication" do
     context "structured_number" do
       it "extracts the number" do
-        expect(data_movement1_record.transaction_number).to eq("100000834941")
+        expect(data_movement1_record.structured_communication).to eq("100000834941")
       end
     end
     context "non-structured_number" do
       it "returns not structured" do
-        expect(data_movement1b_record.transaction_number).to eq("not structured")
+        expect(data_movement1b_record.structured_communication).to eq("not structured")
       end
     end
   end

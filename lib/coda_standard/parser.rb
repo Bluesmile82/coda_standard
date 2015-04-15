@@ -22,7 +22,7 @@ module CodaStandard
             @current_transaction.entry_date         = record.entry_date
             @current_transaction.reference_number   = record.reference_number
             @current_transaction.amount             = record.amount
-            @current_transaction.transaction_number = record.transaction_number
+            @current_transaction.structured_communication = record.structured_communication
           when record.data_movement2?
             @current_transaction.bic = record.bic
           when record.data_movement3?
@@ -54,7 +54,7 @@ module CodaStandard
       puts "Account: #{@transactions.current_account} Account type: #{@transactions.current_account_type} BIC: #{@transactions.current_bic}"
       puts "Old balance: #{@transactions.old_balance} \n\n"
       @transactions.each_with_index do |transaction, index|
-        puts "-- Transaction n.#{index + 1} - number #{transaction.transaction_number} - in date #{transaction.entry_date}-- \n\n"
+        puts "-- Transaction n.#{index + 1} - number #{transaction.structured_communication} - in date #{transaction.entry_date}-- \n\n"
         puts "   RN: #{transaction.reference_number} Account: #{transaction.account} BIC: #{transaction.bic}"
         puts "   Amount: #{transaction.amount} #{transaction.currency}"
         puts "   Name: #{transaction.name}"
