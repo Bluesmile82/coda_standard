@@ -2,9 +2,9 @@
 
 This gem parses the [Coded statement of account](https://www.febelfin.be/sites/default/files/files/Standard-CODA-22-EN.pdf) (CODA) bank standard used by some  banks and follows version 2.2 of this standard.
 
-> This bank standard specifies the lay-out for the electronic files, by banks to customers, of the account transactions and the information concerning the enclosures in connection with the movement. 
+> This bank standard specifies the lay-out for the electronic files, by banks to customers, of the account transactions and the information concerning the enclosures in connection with the movement.
 
-The coda_standard gem requires Ruby version ~> 2.0. 
+The coda_standard gem requires Ruby version ~> 2.0.
 
 ## Install
 
@@ -33,9 +33,12 @@ CodaStandard::Parser.new(filename).parse.current_bic => "GEBABEBB"
 
 # or print a more readable represenation of the file
 CodaStandard::Parser.new(filename).show
+
+# you can also find a transaction inside a transaction list object by the structured communication number
+CodaStandard::Parser.new(filename).parse.find_by_structured_communication('100000001234')
 ```
 
-The available getters for each transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date`, `reference_number` and `transaction_number`.
+The available getters for each transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date`, `reference_number` and `structured_communication`.
 
 ## Contributing
 

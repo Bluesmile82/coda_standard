@@ -10,7 +10,7 @@ module CodaStandard
       address: /^32.{8}(.{105})/,
       account: /^23\d{8}(\w+)\D/,
       bic: /^22.{96}(.{11})/,
-      amount: /^21\d+\s+(\d{16})/,
+      amount: /^21.{29}(\d{16})/,
       old_balance: /^1.{41}(\d)(\d{15})/,
       sep_address: /(^.+)(\d{4})\s(\S+)(\s\S+)?$/,
       sep_account: /(^.)(.{3})(.+)/,
