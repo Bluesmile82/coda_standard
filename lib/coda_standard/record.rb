@@ -1,7 +1,5 @@
 module CodaStandard
-  class Line
-    attr_reader :line
-
+  class Record
     FIELDS = {
       current_bic: /^0.{59}(.{11})/,
       current_account: /^1(.{41})/,
@@ -29,6 +27,30 @@ module CodaStandard
 
     def initialize(line)
       @line = line
+    end
+
+    def header?
+      @line.start_with? "0"
+    end
+
+    def data_old_balance?
+      @line.start_with? "1"
+    end
+
+    def data_movement1?
+      @line.start_with? "21"
+    end
+
+    def data_movement2?
+      @line.start_with? "22"
+    end
+
+    def data_movement3?
+      @line.start_with? "23"
+    end
+
+    def data_information2?
+      @line.start_with? "32"
     end
 
     def current_bic

@@ -9,28 +9,28 @@ module CodaStandard
     end
 
     def parse
-      File.open(@filename).each do |row|
-        line = Line.new(row)
+      File.open(@filename).each do |line|
+        record = Record.new(line)
         case
-          when line.line =~ /^0/
-            @transactions.current_bic = line.current_bic
-          when line.line =~ /^1/
-            set_account(line.current_account)
-            @transactions.old_balance = line.old_balance
-          when line.line =~ /^21/
+          when record.header?
+            @transactions.current_bic = record.current_bic
+          when record.data_old_balance?
+            set_account(record.current_account)
+            @transactions.old_balance = record.old_balance
+          when record.data_movement1?
             @current_transaction = @transactions.create
-            @current_transaction.entry_date         = line.entry_date
-            @current_transaction.reference_number   = line.reference_number
-            @current_transaction.amount             = line.amount
-            @current_transaction.transaction_number = line.transaction_number
-          when line.line =~ /^22/
-            @current_transaction.bic = line.bic
-          when line.line =~ /^23/
-            @current_transaction.currency = line.currency
-            @current_transaction.name     = line.name
-            @current_transaction.account  = line.account
-          when line.line =~ /^32/
-            set_address(line.address)
+            @current_transaction.entry_date         = record.entry_date
+            @current_transaction.reference_number   = record.reference_number
+            @current_transaction.amount             = record.amount
+            @current_transaction.transaction_number = record.transaction_number
+          when record.data_movement2?
+            @current_transaction.bic = record.bic
+          when record.data_movement3?
+            @current_transaction.currency = record.currency
+            @current_transaction.name     = record.name
+            @current_transaction.account  = record.account
+          when record.data_information2?
+            set_address(record.address)
         end
       end
       @transactions
