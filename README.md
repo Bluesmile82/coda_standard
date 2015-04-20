@@ -28,7 +28,7 @@ CodaStandard::Parser.new(filename).parse
 CodaStandard::Parser.new(filename).parse.transactions
 
 # or maybe the BIC:
-CodaStandard::Parser.new(filename).parse.current_bic => "GEBABEBB"
+CodaStandard::Parser.new(filename).parse.current_bic => 'GEBABEBB'
 # also available are: old_balance, current_account, current_account_type
 
 # or print a more readable represenation of the file
@@ -39,6 +39,10 @@ CodaStandard::Parser.new(filename).parse.find_by_structured_communication('10000
 ```
 
 The available getters for each transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date`, `reference_number` and `structured_communication`.
+
+You can get the amount in cents: `amount_cents` => 50086
+
+or with the currency: `amount_money` => '500,86 EUR'
 
 ## Contributing
 

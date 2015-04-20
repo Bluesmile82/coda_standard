@@ -16,9 +16,8 @@ module CodaStandard
       @transactions.each_with_index(&blk)
     end
 
-
     def find_by_structured_communication(structured_communication)
-      @transactions.select{|t| t.match_structured_communication(structured_communication)}
+      @transactions.select{ |t| t.match_structured_communication(structured_communication) }
     end
   end
 end

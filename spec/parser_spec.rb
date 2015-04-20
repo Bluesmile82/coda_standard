@@ -22,7 +22,7 @@ describe CodaStandard::Parser do
 
   describe "set_address" do
     before :each do
-      address = {:address=>"5 RUE DU CENTCINQUANTENAIRE", :postcode=>"6750", :city=>"MUSSY-LA-VILLE", :country=>" BELGIQUE"}
+      address = { address: "5 RUE DU CENTCINQUANTENAIRE", postcode: "6750", city: "MUSSY-LA-VILLE", country: " BELGIQUE" }
       parser.set_address(address)
     end
 
@@ -45,7 +45,7 @@ describe CodaStandard::Parser do
 
  describe "set_account" do
     before :each do
-      account = {account_number:"035918134040", account_type:"bban_be_account"}
+      account = {account_number: "035918134040", account_type: "bban_be_account"}
       parser.set_account(account)
     end
 
@@ -60,7 +60,7 @@ describe CodaStandard::Parser do
 
   describe "show" do
     it "shows the info from the transactions" do
-      expect{parser.show}.to output("**--Transactions--**\n\nAccount: 539007547034 Account type: bban_be_account BIC: GEBABEBB\nOld balance: 57900,000 \n\n-- Transaction n.1 - number 100000834941 - in date 310315-- \n\n   RN: 0001500000103 Account: BE53900754703405 BIC: GKCCBEBB\n   Amount: 500,000 EUR\n   Name: LASTNM PERSON\n   Address: CHAUSSEE DE BIERE 10 1978 SOMECITY  \n\n-- Transaction n.2 - number 100000835749 - in date 310315-- \n\n   RN: 0001500000104 Account: LU539007547034898400 BIC: BILLLULL\n   Amount: 200,000 EUR\n   Name: M.JOHN DOE\n   Address: 5 STREET 3654 CITY  BELGIQUE \n\n").to_stdout
+      expect{ parser.show }.to output("**--Transactions--**\n\nAccount: 539007547034 Account type: bban_be_account BIC: GEBABEBB\nOld balance: 57900.000 \n\n-- Transaction n.1 - number 100000834941 - in date 310315-- \n\n   RN: 0001500000103 Account: BE53900754703405 BIC: GKCCBEBB\n   Amount: 500,86 EUR\n   Name: LASTNM PERSON\n   Address: CHAUSSEE DE BIERE 10 1978 SOMECITY  \n\n-- Transaction n.2 - number 100000835749 - in date 310315-- \n\n   RN: 0001500000104 Account: LU539007547034898400 BIC: BILLLULL\n   Amount: 200,00 EUR\n   Name: M.JOHN DOE\n   Address: 5 STREET 3654 CITY  BELGIQUE \n\n").to_stdout
     end
   end
 
