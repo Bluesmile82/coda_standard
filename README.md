@@ -21,24 +21,28 @@ and run `bundle install` from your shell.
 ## Usage
 
 ```ruby
-# a new TransactionList object:
+
+# a new TransactionList objects array:
 CodaStandard::Parser.new(filename).parse
 
-# or an array of transactions:
-CodaStandard::Parser.new(filename).parse.transactions
+# or an array of Transaction Objects from the first Transaction List:
+CodaStandard::Parser.new(filename).parse.first.transactions
 
-# or maybe the BIC:
-CodaStandard::Parser.new(filename).parse.current_bic => 'GEBABEBB'
-# also available are: old_balance, current_account, current_account_type
+# or maybe the BIC of the first TransactionList:
+CodaStandard::Parser.new(filename).parse.first.current_bic => 'GEBABEBB'
 
-# or print a more readable represenation of the file
+# or the amount of the first Transaction:
+CodaStandard::Parser.new(filename).parse.first.transactions[0].amount
+
+# or print a more readable representation of the file
 CodaStandard::Parser.new(filename).show
 
 # you can also find a transaction inside a transaction list object by the structured communication number
-CodaStandard::Parser.new(filename).parse.find_by_structured_communication('100000001234')
+CodaStandard::Parser.new(filename).parse.first.find_by_structured_communication('100000001234')
 ```
+The available getters for each TransactionList are: `old_balance`, `current_account`, `current_account_type`, `current_bic`
 
-The available getters for each transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date`, `reference_number` and `structured_communication`.
+The available getters for each Transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date`, `reference_number` and `structured_communication`.
 
 You can get the amount in cents: `amount_cents` => 50086
 

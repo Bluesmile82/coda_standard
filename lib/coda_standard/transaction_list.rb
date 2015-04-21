@@ -7,7 +7,7 @@ module CodaStandard
       @transactions = []
     end
 
-    def create
+    def create_transaction
       @transactions << Transaction.new
       @transactions.last
     end

@@ -10,9 +10,9 @@ describe CodaStandard::TransactionList do
   end
 
   describe "create" do
-    it "creates a new transaction and puts it into the array" do
-      transaction_list.create
-      expect(transaction_list.create).to eq transaction_list.transactions.last
+    it "creates a new transaction and puts it into the current transaction list" do
+      transaction_list.create_transaction
+      expect(transaction_list.create_transaction).to eq transaction_list.transactions.last
     end
   end
 end

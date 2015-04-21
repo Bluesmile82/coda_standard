@@ -6,7 +6,7 @@ describe CodaStandard::Parser do
 
   describe "initialize" do
     it "initializes some class variables" do
-      expect(parser.transactions).to be_a(CodaStandard::TransactionList)
+      expect(parser.transactions).to eq([])
     end
   end
 
@@ -15,9 +15,11 @@ describe CodaStandard::Parser do
       parser.parse
     end
 
-    it "returns a Transactions object" do
-        expect(parser.parse).to be_a(CodaStandard::TransactionList)
+    it "returns an array of TransactionLists" do
+        expect(parser.parse).to be_a(Array)
+        parser.parse.each{ |tl| expect(tl).to be_a(CodaStandard::TransactionList) }
     end
+
   end
 
   describe "set_address" do
@@ -45,22 +47,22 @@ describe CodaStandard::Parser do
 
  describe "set_account" do
     before :each do
-      account = {account_number: "035918134040", account_type: "bban_be_account"}
+      account = { account_number: "035918134040", account_type: "bban_be_account" }
       parser.set_account(account)
     end
 
     it "sets the current_account field to the TransactionList" do
-      expect(parser.transactions.current_account).to eq("035918134040")
+     expect(parser.current_transaction_list.current_account).to eq("035918134040")
     end
 
     it "sets the account_type field to the TransactionList" do
-      expect(parser.transactions.current_account_type).to eq("bban_be_account")
+      expect(parser.current_transaction_list.current_account_type).to eq("bban_be_account")
     end
   end
 
   describe "show" do
     it "shows the info from the transactions" do
-      expect{ parser.show }.to output("**--Transactions--**\n\nAccount: 539007547034 Account type: bban_be_account BIC: GEBABEBB\nOld balance: 57900.000 \n\n-- Transaction n.1 - number 100000834941 - in date 310315-- \n\n   RN: 0001500000103 Account: BE53900754703405 BIC: GKCCBEBB\n   Amount: 500,86 EUR\n   Name: LASTNM PERSON\n   Address: CHAUSSEE DE BIERE 10 1978 SOMECITY  \n\n-- Transaction n.2 - number 100000835749 - in date 310315-- \n\n   RN: 0001500000104 Account: LU539007547034898400 BIC: BILLLULL\n   Amount: 200,00 EUR\n   Name: M.JOHN DOE\n   Address: 5 STREET 3654 CITY  BELGIQUE \n\n").to_stdout
+      expect{ parser.show }.to output("**--Transaction List 1--**\n\nAccount: 539007547034 Account type: bban_be_account BIC: GEBABEBB\nOld balance: 57900.000 \n\n-- Transaction n.1 - number 100000834941 - in date 310315-- \n\n   RN: 0001500000103 Account: BE53900754703405 BIC: GKCCBEBB\n   Amount: 500,86 EUR\n   Name: LASTNM PERSON\n   Address: CHAUSSEE DE BIERE 10 1978 SOMECITY  \n\n-- Transaction n.2 - number 100000835749 - in date 310315-- \n\n   RN: 0001500000104 Account: LU539007547034898400 BIC: BILLLULL\n   Amount: 200,00 EUR\n   Name: M.JOHN DOE\n   Address: 5 STREET 3654 CITY  BELGIQUE \n\n").to_stdout
     end
   end
 

@@ -1,10 +1,11 @@
 module CodaStandard
   class Parser
-    attr_reader :transactions, :old_balance, :current_bic, :current_account, :current_transaction
+    attr_reader :transactions, :old_balance, :current_bic, :current_account, :current_transaction, :current_transaction_list
 
     def initialize(filename)
       @filename            = filename
-      @transactions        = TransactionList.new
+      @transactions        = []
+      @current_transaction_list = TransactionList.new
       @current_transaction = Transaction.new
     end
 
@@ -13,10 +14,11 @@ module CodaStandard
         record = Record.new(line)
         case
         when record.header?
-          @transactions.current_bic = record.current_bic
+          create_transaction_list
+          @current_transaction_list.current_bic = record.current_bic
         when record.data_old_balance?
           set_account(record.current_account)
-          @transactions.old_balance = record.old_balance
+          @current_transaction_list.old_balance = record.old_balance
         when record.data_movement1?
           create_transaction
           extract_data_movement1(record)
@@ -39,12 +41,17 @@ module CodaStandard
     end
 
     def set_account(account)
-      @transactions.current_account      = account[:account_number]
-      @transactions.current_account_type = account[:account_type]
+     @current_transaction_list.current_account      = account[:account_number]
+     @current_transaction_list.current_account_type = account[:account_type]
     end
 
     def create_transaction
-      @current_transaction = @transactions.create
+      @current_transaction = @current_transaction_list.create_transaction
+    end
+
+    def create_transaction_list
+      @current_transaction_list = TransactionList.new
+      @transactions << @current_transaction_list
     end
 
     def extract_data_movement1(record)
@@ -66,15 +73,17 @@ module CodaStandard
 
     def show
       parse
-      puts "**--Transactions--**\n\n"
-      puts "Account: #{@transactions.current_account} Account type: #{@transactions.current_account_type} BIC: #{@transactions.current_bic}"
-      puts "Old balance: #{@transactions.old_balance} \n\n"
       @transactions.each_with_index do |transaction, index|
-        puts "-- Transaction n.#{index + 1} - number #{transaction.structured_communication} - in date #{transaction.entry_date}-- \n\n"
-        puts "   RN: #{transaction.reference_number} Account: #{transaction.account} BIC: #{transaction.bic}"
-        puts "   Amount: #{transaction.amount_money}"
-        puts "   Name: #{transaction.name}"
-        puts "   Address: #{transaction.address} #{transaction.postcode} #{transaction.city} #{transaction.country} \n\n"
+        puts "**--Transaction List #{ index + 1 }--**\n\n"
+        puts "Account: #{transaction.current_account} Account type: #{transaction.current_account_type} BIC: #{transaction.current_bic}"
+        puts "Old balance: #{transaction.old_balance} \n\n"
+        transaction.each_with_index do |transaction, index|
+          puts "-- Transaction n.#{index + 1} - number #{transaction.structured_communication} - in date #{transaction.entry_date}-- \n\n"
+          puts "   RN: #{transaction.reference_number} Account: #{transaction.account} BIC: #{transaction.bic}"
+          puts "   Amount: #{transaction.amount_money}"
+          puts "   Name: #{transaction.name}"
+          puts "   Address: #{transaction.address} #{transaction.postcode} #{transaction.city} #{transaction.country} \n\n"
+        end
       end
     end
   end
