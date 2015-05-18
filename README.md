@@ -42,7 +42,7 @@ CodaStandard::Parser.new(filename).parse.first.find_by_structured_communication(
 ```
 The available getters for each TransactionList are: `old_balance`, `current_account`, `current_account_type`, `current_bic`
 
-The available getters for each Transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date`, `reference_number` and `structured_communication`.
+The available getters for each Transaction are: `name`, `currency`, `bic`, `address`, `postcode`, `city`, `country`, `amount`, `account`, `entry_date` (returns a Date), `reference_number` and `structured_communication`.
 
 You can get the amount in cents: `amount_cents` => 50086
 

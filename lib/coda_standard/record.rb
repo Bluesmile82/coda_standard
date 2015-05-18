@@ -103,10 +103,26 @@ module CodaStandard
       extract(:structured_communication)
     end
 
+    def valid?
+      return field_valid?(:current_account) if data_old_balance?
+      true
+    end
+
+    def field_valid?(field)
+      if field == :current_account
+        return raw_extract(:current_account).scan(CLEAN_FIELDS[:sep_account]).flatten.size == 3
+      end
+      true
+    end
+
     private
 
+    def raw_extract(field)
+      @line.scan(FIELDS[field]).join.strip
+    end
+
     def extract(field)
-      result = @line.scan(FIELDS[field]).join.strip
+      result = raw_extract(field)
       case field
         when :address
           separate_address(result)
@@ -125,6 +141,7 @@ module CodaStandard
       address_fields = address.scan(CLEAN_FIELDS[:sep_address])[0]
       { address: address_fields[0].strip, postcode: address_fields[1], city: address_fields[2], country: address_fields[3] }
     end
+
 
     def clean_account(account)
       account_type = account.scan(CLEAN_FIELDS[:sep_account])[0][0]

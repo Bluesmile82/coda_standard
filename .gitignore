@@ -14,6 +14,8 @@
 *.a
 mkmf.log
 
+inv.cod
+
 *.gem
 *.rbc
 /.config

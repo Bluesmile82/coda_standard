@@ -9,7 +9,16 @@ module CodaStandard
       @current_transaction = Transaction.new
     end
 
-    def parse
+    def valid?
+      File.open(@filename).each do |line|
+        record = Record.new(line)
+        return false if record.valid? == false
+      end
+      true
+    end
+
+    def parse(validation: validation = true)
+      return 'Invalid coda file' if validation != false && !valid?
       File.open(@filename).each do |line|
         record = Record.new(line)
         case
