@@ -104,7 +104,9 @@ module CodaStandard
     end
 
     def valid?
-      return field_valid?(:current_account) if data_old_balance?
+      if data_old_balance?
+        return false if !field_valid?(:current_account)
+      end
       true
     end
 

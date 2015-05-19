@@ -12,13 +12,13 @@ module CodaStandard
     def valid?
       File.open(@filename).each do |line|
         record = Record.new(line)
-        return false if record.valid? == false
+        return false unless record.valid?
       end
       true
     end
 
-    def parse(validation: validation = true)
-      return 'Invalid coda file' if validation != false && !valid?
+    def parse(skip_validation: skip_validation = false)
+      return [] if !skip_validation && !valid?
       File.open(@filename).each do |line|
         record = Record.new(line)
         case
@@ -80,8 +80,9 @@ module CodaStandard
       @current_transaction.account  = record.account
     end
 
-    def show
-      parse
+    def show(skip_validation: skip_validation = false)
+      puts "The file is invalid" if !skip_validation && !valid?
+      parse(skip_validation: skip_validation)
       @transactions.each_with_index do |transaction, index|
         puts "**--Transaction List #{ index + 1 }--**\n\n"
         puts "Account: #{transaction.current_account} Account type: #{transaction.current_account_type} BIC: #{transaction.current_bic}"

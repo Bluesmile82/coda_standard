@@ -4,6 +4,7 @@ describe CodaStandard::Record do
 
   let(:header_record) { CodaStandard::Record.new("0000031031520005                  MMIF SA/BANK              GEBABEBB   00538839354 00000                                       2")}
   let(:old_balance_data_record) {  CodaStandard::Record.new("10016539007547034 EUR0BE                  0000000057900000300315MMIF SA/EVOCURE                                              017")}
+  let(:old_balance_data_record_invalid) {  CodaStandard::Record.new("100/0000/00135")}
   let(:data_movement1_record) {  CodaStandard::Record.new("21000100000001500000103        0000000000500860010415001500001101100000834941                                      31031501601 0")}
   let(:data_movement1b_record) {  CodaStandard::Record.new("21000100000001500000103        0000000000500860010415001500001001100000834941                                      31031501601 0")}
   let(:data_movement2_record) {  CodaStandard::Record.new("2200010000                                                                                        GKCCBEBB                   1 0")}
@@ -136,6 +137,7 @@ describe CodaStandard::Record do
         expect(data_movement1_record.structured_communication).to eq("100000834941")
       end
     end
+
     context "non-structured_number" do
       it "returns not structured" do
         expect(data_movement1b_record.structured_communication).to eq("not structured")
@@ -149,4 +151,13 @@ describe CodaStandard::Record do
     end
   end
 
+  describe "valid?" do
+    it "returns true if the record is valid" do
+      expect(old_balance_data_record.valid?).to be true
+    end
+
+    it "returns false if the record is invalid" do
+      expect(old_balance_data_record_invalid.valid?).to be false
+    end
+  end
 end
