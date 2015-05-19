@@ -17,7 +17,7 @@ module CodaStandard
     }
 
     CLEAN_FIELDS = {
-      clean_zeros: /0*([^0]\d+)(\d{3})/,
+      clean_zeros: /0*(\d+)(\d{3})/,
       sep_address: /(^.+)(\d{4})\s(\S+)(\s\S+)?$/,
       sep_account: /(^.)(.{3})(.+)/,
       clean_structured: /.{3}(.{12})/,
@@ -125,6 +125,7 @@ module CodaStandard
 
     def extract(field)
       result = raw_extract(field)
+      p result if field == :amount
       case field
         when :address
           separate_address(result)
