@@ -37,6 +37,12 @@ CodaStandard::Parser.new(filename).parse.first.transactions[0].amount
 # or print a more readable representation of the file
 CodaStandard::Parser.new(filename).show
 
+# or check if the file is valid (the validation is not yet implemented for every field)
+CodaStandard::Parser.new(filename).valid? => true
+
+# by default the parse and show methods have validation but you can skip it if you dare
+CodaStandard::Parser.new(filename).parse(skip_validation: true)
+
 # you can also find a transaction inside a transaction list object by the structured communication number
 CodaStandard::Parser.new(filename).parse.first.find_by_structured_communication('100000001234')
 ```
