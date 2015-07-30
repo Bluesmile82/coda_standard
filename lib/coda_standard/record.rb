@@ -125,7 +125,6 @@ module CodaStandard
 
     def extract(field)
       result = raw_extract(field)
-      p result if field == :amount
       case field
         when :address
           separate_address(result)
