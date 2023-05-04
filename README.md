@@ -1,5 +1,7 @@
 # coda_standard
 
+ATTENTION: This gem is not maintained anymore. If you wish to became a maintainer please contact me.
+
 This gem parses the [Coded statement of account](https://www.febelfin.be/sites/default/files/files/Standard-CODA-22-EN.pdf) (CODA) bank standard used by some  banks and follows version 2.2 of this standard.
 
 > This bank standard specifies the lay-out for the electronic files, by banks to customers, of the account transactions and the information concerning the enclosures in connection with the movement.
